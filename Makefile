@@ -1,8 +1,8 @@
-all: histogram.png
+all: report.html
 	@echo Build all
 
 clean:
-	rm -f words.txt histogram.tsv histogram.png
+	rm -f words.txt histogram.tsv histogram.png report.html
 	@echo Clean all
 	
 words.txt: /usr/share/dict/words
@@ -16,4 +16,4 @@ histogram.png: histogram.tsv
 	rm Rplots.pdf
 
 report.html: report.rmd histogram.tsv histogram.png
-	Rscript -e 'rmarkdown::render("$<")'
+	Rscript -e 'Sys.setenv(RSTUDIO_PANDOC="/Applications/RStudio.app/Contents/MacOS/pandoc"); rmarkdown::render("$<")'
